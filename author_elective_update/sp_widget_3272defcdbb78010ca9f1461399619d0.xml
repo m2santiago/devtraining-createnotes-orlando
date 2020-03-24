@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope,$scope) {
+	/* widget controller */
+	var c = this;
+	c.selectItem = function(idx) {
+		var id = c.data.notes[idx].sys_id;
+		console.log('Note ID: ' + id);
+		$rootScope.noteID = id;
+		$rootScope.$emit('selectNote', id);
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>notes_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Notes List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	//create an array to populate with notes
+	data.notes = [];
+	var noteGR = new GlideRecord('x_snc_createnotes_note');
+	noteGR.addQuery('user', gs.getUser().getID());
+	noteGR.orderByDesc('sys_created_on');
+	noteGR.query();
+	while (noteGR.next()) {
+		var noteObj = {};
+		//use service portal helper method to get some display values
+		$sp.getRecordDisplayValues(noteObj, noteGR, 'number,title,sys_id');
+		//get the first 20 characters of the description
+		noteObj.note = noteGR.getValue('note').slice(0,20);
+		//push the populated obj into the array
+		data.notes.push(noteObj);
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-24 15:29:20</sys_created_on>
+        <sys_id>3272defcdbb78010ca9f1461399619d0</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>Notes List</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_3272defcdbb78010ca9f1461399619d0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-24 17:18:35</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">
+      ${Notes}
+    </h3>
+  </div>
+  <div class="list-group">
+    <a class="list-group-item" ng-click="c.selectItem($index)" ng-repeat="note in data.notes">
+      <h4 class="list-group-item-heading">
+        {{'{'}}{note.title}}
+      </h4>
+      <p class="list-group-item-text">
+        {{'{'}}{note.note}}
+      </p>
+    </a>
+  </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</application>
+        <file_path/>
+        <instance_id>fb7a7eb1db9797806578f22ebf96190e</instance_id>
+        <instance_name>dev65018</instance_name>
+        <name>sp_widget_3272defcdbb78010ca9f1461399619d0</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($rootScope,$scope) {
+	/* widget controller */
+	var c = this;
+	c.selectItem = function(idx) {
+		var id = c.data.notes[idx].sys_id;
+		console.log('Note ID: ' + id);
+		$rootScope.noteID = id;
+		$rootScope.$emit('selectNote', id);
+	}
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;notes_list&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;Notes List&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	//create an array to populate with notes
+	data.notes = [];
+	var noteGR = new GlideRecord('x_snc_createnotes_note');
+	noteGR.addQuery('user', gs.getUser().getID());
+	noteGR.orderByDesc('sys_created_on');
+	noteGR.query();
+	while (noteGR.next()) {
+		var noteObj = {};
+		//use service portal helper method to get some display values
+		$sp.getRecordDisplayValues(noteObj, noteGR, 'number,title,sys_id');
+		//get the first 20 characters of the description
+		noteObj.note = noteGR.getValue('note').slice(0,20);
+		//push the populated obj into the array
+		data.notes.push(noteObj);
+	}
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-24 15:29:20&lt;/sys_created_on&gt;&lt;sys_id&gt;3272defcdbb78010ca9f1461399619d0&lt;/sys_id&gt;&lt;sys_mod_count&gt;42&lt;/sys_mod_count&gt;&lt;sys_name&gt;Notes List&lt;/sys_name&gt;&lt;sys_package display_value="CreateNotes" source="x_snc_createnotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CreateNotes"&gt;df5fd9a5090232007f44e1046c8ff69f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_3272defcdbb78010ca9f1461399619d0&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-03-24 17:18:35&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading clearfix"&gt;
+    &lt;h3 class="panel-title pull-left"&gt;
+      ${Notes}
+    &lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="list-group"&gt;
+    &lt;a class="list-group-item" ng-click="c.selectItem($index)" ng-repeat="note in data.notes"&gt;
+      &lt;h4 class="list-group-item-heading"&gt;
+        {{'{'}}{note.title}}
+      &lt;/h4&gt;
+      &lt;p class="list-group-item-text"&gt;
+        {{'{'}}{note.note}}
+      &lt;/p&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-469497322</payload_hash>
+        <record_name>Notes List</record_name>
+        <reverted_from/>
+        <source>d9fc427cdbb78010ca9f1461399619c8</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-24 17:18:35</sys_created_on>
+        <sys_id>cf7b267cdbf78010ca9f14613996195d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1710d8d96c40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-24 17:18:35</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>0b7b267c04f780103906daf28cd0705d</update_guid>
+        <update_guid_history>0b7b267c04f780103906daf28cd0705d:-469497322,b2692a30d63b801001107469122f868b:-1044981582,7c696e30b03b8010c970e8c0b2c31b6c:-301373646,1559eefc7ef780109d4851034c76d6bc:-1044981582,fc292a30dc3b80108b16d61fb1f27f91:-393098446,78096a30843b80104aef793d7586b331:-1044981582,e5f82a30853b80100f8b27455a9c7583:-2143282904,c9c8a630563b80100c4f17d370542f5e:-1044981582,f178e23cc2f7801010c27995cf166776:1319347533,15486ebcb0f78010b99fe0657a8c44c1:470257324,4628eefcf2f78010072600edacf76aa9:-1875720367,f272a23c36f78010c1f51327994363e3:-1044981582,5012aef894f7801046b143e82ae2f43a:-1187575313,b5f1a6f844f7801005539b877d666aea:-1044981582,64e12ef8ecf780104e6cca8416077e2f:301341644,6b7122f826f780100e57b7acb9d460b3:660255158,4271e2f8acf780106d9d2885da9a64fc:-859067019,2b61a6f842f78010e4b57e9848bff0e1:-1352078762,1a5122f83ff7801099c2e0472eda09d4:1173914248,0d3126f8d0f7801077c39ccda4320635:-1516662439,4721e2f8ecf78010043fc65216957aeb:1173914248,18f062f820f780104d87eff945cc4772:1804441684,7bd0aeb886f780109544b850f4581d02:-1395604318,ccd0eeb8a9f78010273424a235becff1:586719712,f390a2b8baf780101b604266a6fe5a5b:234383535,5970eab803f7801030c4bd735ad83df2:-1178101173,ef40aab80bf78010c7878ffe8feb5929:-583316677,b9bfd2b8b4f78010e1d950e64fa767ff:-1044981582,75afd2b82bf78010bbe8ba9febf00f66:1623823791,bf8f92b85bf78010ba8b8d1430fd3216:299200566,d74f1a388ff78010c7b0b66654857b54:1623823791,0b0f5a384df7801027276337e88ded1a:-562853593,956c92f40af780108b923dab7722941c:-1044981582,ef0b12f48ef78010ec366c7bfe613d4a:801358088,08395274dcf78010cb0cc3869103e5f6:-469497322,a709927424f7801077a0c72b97d78f72:1389997105,4548de3465f78010cdc83dc52009ffcd:-2122078515,8bd756f06af780102cfe9b32b5dfeab8:504909175,1e3756f042f78010f6c67b44db263c32:43281966,35c616b0e3f780100f1598aaf491ebc5:-2122078515,6eb516f0faf78010560aacd7516cbc96:1573299944,ba2352704cf78010a1544262effb16c5:-584959505,fe725270d8f780102db92e6ec38e9abf:1375678907</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Notes List">4ddd6ef0db3b8010ca9f146139961991</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-24 17:28:50</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>86942c2191da48328b872633de35c784</sys_id>
+        <sys_metadata>3272defcdbb78010ca9f1461399619d0</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Notes List</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_scope_delete display_value="">64daa03572704d49a928bf08a985d6f9</sys_scope_delete>
+        <sys_update_name>sp_widget_3272defcdbb78010ca9f1461399619d0</sys_update_name>
+        <sys_update_version display_value="sp_widget_3272defcdbb78010ca9f1461399619d0">cf7b267cdbf78010ca9f14613996195d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-24 17:28:50</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
